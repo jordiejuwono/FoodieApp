@@ -2,6 +2,13 @@
 buildscript {
     ext.glide_version = '4.14.2'
     ext.dagger_version = '2.44.2'
+    ext.retrofit_version= '2.9.0'
+    ext.gson_version='2.10.1'
+    ext.okhttp_version='4.10.0'
+    ext.coroutines_version='1.6.4'
+    ext.livedata_ktx_version='2.5.1'
+    ext.fragment_ktx_version='1.5.5'
+    ext.activity_ktx_version='1.6.1'
 }
 plugins {
     id 'com.android.application' version '7.2.1' apply false
