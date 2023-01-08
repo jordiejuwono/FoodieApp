@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    android:paddingHorizontal="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".home.HomeFragment">
+
+    <TextView
+        android:id="@+id/tv_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Delicious Foods Recipe"
+        android:textColor="@color/text_color"
+        android:textSize="26sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_search_view"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toBottomOf="@id/tv_header"
+        app:queryBackground="@android:color/transparent"
+        app:queryHint="Search for food recipes..." />
+
+    <TextView
+        android:id="@+id/tv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Categories"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/sv_search" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontal_scroll"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/tv_categories">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="All"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Breakfast"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Balanced"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Lunch"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Chicken"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Fish"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:columnCount="2"
+        android:orientation="vertical"
+        android:rowCount="2"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_scroll"
+        tools:listitem="@layout/item_food_list" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
