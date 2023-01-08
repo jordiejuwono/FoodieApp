@@ -1,6 +1,7 @@
 package com.jordju.foodieapp.di
 
 import com.jordju.foodieapp.core.domain.repository.FoodieRepository
+import com.jordju.foodieapp.core.domain.usecase.GetFoodDetailsUseCase
 import com.jordju.foodieapp.core.domain.usecase.GetFoodListUseCase
 import dagger.Module
 import dagger.Provides
@@ -10,5 +11,8 @@ class AppModule {
 
     @Provides
     fun provideGetFoodListUseCase(foodieRepository: FoodieRepository) = GetFoodListUseCase(foodieRepository)
+
+    @Provides
+    fun provideGetFoodDetailsUseCase(foodieRepository: FoodieRepository) = GetFoodDetailsUseCase(foodieRepository)
 
 }

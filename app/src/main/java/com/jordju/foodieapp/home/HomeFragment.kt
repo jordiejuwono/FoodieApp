@@ -1,6 +1,7 @@
 package com.jordju.foodieapp.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.jordju.foodieapp.core.domain.model.HitEntity
 import com.jordju.foodieapp.core.ui.FoodListAdapter
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.FragmentHomeBinding
+import com.jordju.foodieapp.detail.DetailActivity
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
@@ -45,6 +47,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeViewModel.getFoodList()
         setupRecyclerView()
     }
 
@@ -61,7 +64,7 @@ class HomeFragment : Fragment() {
     private fun setupRecyclerView() {
         val foodListAdapter = FoodListAdapter(object : FoodListAdapter.OnClickListeners {
             override fun onClick(item: HitEntity) {
-                TODO("Not yet implemented")
+                DetailActivity.startActivity(requireContext(), item)
             }
 
         })
@@ -72,7 +75,7 @@ class HomeFragment : Fragment() {
         }
 
         // populate recycler view data
-        homeViewModel.getFoodList().observe(viewLifecycleOwner) {
+        homeViewModel.getFoodListResult.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
                     showLoading(true)

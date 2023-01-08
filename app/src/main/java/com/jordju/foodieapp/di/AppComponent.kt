@@ -2,6 +2,7 @@ package com.jordju.foodieapp.di
 
 import com.jordju.foodieapp.MainActivity
 import com.jordju.foodieapp.core.di.CoreComponent
+import com.jordju.foodieapp.detail.DetailActivity
 import com.jordju.foodieapp.home.HomeFragment
 import dagger.Component
 
@@ -19,4 +20,5 @@ interface AppComponent {
 
     fun inject(activity: MainActivity)
     fun inject(fragment: HomeFragment)
+    fun inject(activity: DetailActivity)
 }

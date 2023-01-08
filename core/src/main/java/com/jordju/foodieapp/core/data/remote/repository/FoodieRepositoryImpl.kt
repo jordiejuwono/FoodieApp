@@ -35,10 +35,10 @@ class FoodieRepositoryImpl @Inject constructor(
             }
         }
 
-    override fun getFoodDetails(detailLink: String): Flow<Resource<FoodDetails>> =
+    override fun getFoodDetails(detailId: String): Flow<Resource<FoodDetails>> =
         flow {
             emit(Resource.Loading())
-            val remoteCalls = remoteDataSource.getFoodDetails(detailLink)
+            val remoteCalls = remoteDataSource.getFoodDetails(detailId)
             remoteCalls.collect {
                 when(it) {
                     is ApiResponse.Success -> {
