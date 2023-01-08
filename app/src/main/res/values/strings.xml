@@ -4,4 +4,13 @@
     <string name="title_favorite">Favorite</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_all">All</string>
+    <string name="text_chicken">Chicken</string>
+    <string name="text_fish">Fish</string>
+    <string name="text_noodle">Noodle</string>
+    <string name="text_beef">Beef</string>
+    <string name="text_spaghetti">Spaghetti</string>
+    <string name="text_salad">Salad</string>
+    <string name="text_categories">Categories</string>
+    <string name="text_header">Let\'s Search for\nDelicious Foods Recipe</string>
 </resources>
