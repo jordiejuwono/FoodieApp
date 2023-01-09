@@ -60,6 +60,15 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.svSearch.apply {
+            setQuery("", false)
+            clearFocus()
+        }
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
     private fun getData(query: String = "") {
         homeViewModel.getFoodList(query)
     }

@@ -52,6 +52,13 @@ class SearchResultActivity : AppCompatActivity() {
         }
     }
 
+    private fun showError(isError: Boolean) {
+        binding.apply {
+            rvSearchResult.isVisible = !isError
+            tvError.isVisible = isError
+        }
+    }
+
     private fun getSearchResult() {
         val adapter = FoodListAdapter(object : FoodListAdapter.OnClickListeners {
             override fun onClick(item: HitEntity) {
@@ -69,14 +76,18 @@ class SearchResultActivity : AppCompatActivity() {
         viewModel.getFoodList(getQuery ?: "").observe(this) {
             when (it) {
                 is Resource.Loading -> {
+                    showError(false)
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showError(false)
                     showLoading(false)
                     adapter.setData(it.data?.hits)
                 }
                 is Resource.Error -> {
-
+                    showLoading(false)
+                    showError(true)
+                    binding.tvError.text = it.message
                 }
             }
         }
