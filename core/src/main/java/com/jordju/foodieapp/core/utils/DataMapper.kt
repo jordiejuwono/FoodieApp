@@ -53,19 +53,19 @@ object DataMapper {
 
     private fun mapTotalNutrientsResponseToEntity(response: TotalNutrients?): TotalNutrientsEntity =
         TotalNutrientsEntity(
-            eNERCKCAL = mapEnergyToEntity(response?.eNERCKCAL),
-            fAT = mapFatToEntity(response?.fAT),
-            cHOCDF = mapCarbsToEntity(response?.cHOCDF),
-            sUGAR = mapSugarToEntity(response?.sUGAR),
-            pROCNT = mapProteinToEntity(response?.pROCNT),
-            cHOLE = mapCholesterolToEntity(response?.cHOLE),
-            cA = mapCalciumToEntity(response?.cA),
+            energy = mapEnergyToEntity(response?.eNERCKCAL),
+            fat = mapFatToEntity(response?.fAT),
+            carbs = mapCarbsToEntity(response?.cHOCDF),
+            sugar = mapSugarToEntity(response?.sUGAR),
+            protein = mapProteinToEntity(response?.pROCNT),
+            cholesterol = mapCholesterolToEntity(response?.cHOLE),
+            calcium = mapCalciumToEntity(response?.cA),
         )
 
     private fun mapCalciumToEntity(
         response: CA?
-    ): cAEntity {
-        return cAEntity(
+    ): CalciumEntity {
+        return CalciumEntity(
             label = response?.label ?: "",
             quantity = response?.quantity ?: 0.0,
             unit = response?.unit ?: "",
@@ -74,8 +74,8 @@ object DataMapper {
 
     private fun mapCholesterolToEntity(
         response: CHOLE?
-    ): cHOLEEntity {
-        return cHOLEEntity(
+    ): CholesterolEntity {
+        return CholesterolEntity(
             label = response?.label ?: "",
             quantity = response?.quantity ?: 0.0,
             unit = response?.unit ?: "",
@@ -84,8 +84,8 @@ object DataMapper {
 
     private fun mapProteinToEntity(
         response: PROCNT?
-    ): pROCNTEntity {
-        return pROCNTEntity(
+    ): ProteinEntity {
+        return ProteinEntity(
             label = response?.label ?: "",
             quantity = response?.quantity ?: 0.0,
             unit = response?.unit ?: "",
@@ -94,8 +94,8 @@ object DataMapper {
 
     private fun mapSugarToEntity(
         response: SUGAR?
-    ): sUGAREntity {
-        return sUGAREntity(
+    ): SugarEntity {
+        return SugarEntity(
             label = response?.label ?: "",
             quantity = response?.quantity ?: 0.0,
             unit = response?.unit ?: "",
@@ -104,8 +104,8 @@ object DataMapper {
 
     private fun mapCarbsToEntity(
         response: CHOCDF?
-    ): cHOCDFEntity {
-        return cHOCDFEntity(
+    ): CarbsEntity {
+        return CarbsEntity(
             label = response?.label ?: "",
             quantity = response?.quantity ?: 0.0,
             unit = response?.unit ?: "",
@@ -114,8 +114,8 @@ object DataMapper {
 
     private fun mapEnergyToEntity(
         response: ENERCKCAL?
-    ): eNERCKCALEntity {
-        return eNERCKCALEntity(
+    ): EnergyEntity {
+        return EnergyEntity(
             label = response?.label ?: "",
             quantity = response?.quantity ?: 0.0,
             unit = response?.unit ?: "",
@@ -124,8 +124,8 @@ object DataMapper {
 
     private fun mapFatToEntity(
         response: FAT?
-    ): fATEntity {
-        return fATEntity(
+    ): FatEntity {
+        return FatEntity(
             label = response?.label ?: "",
             quantity = response?.quantity ?: 0.0,
             unit = response?.unit ?: "",

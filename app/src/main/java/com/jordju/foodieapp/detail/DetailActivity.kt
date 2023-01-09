@@ -56,13 +56,13 @@ class DetailActivity : AppCompatActivity() {
             ingredients += "\u2022 ${it.text}\n"
         }
         nutrientsList?.apply {
-            nutrients += "\u2022 ${eNERCKCAL.label} - ${String.format("%.2f", eNERCKCAL.quantity)} ${eNERCKCAL.unit}\n"
-            nutrients += "\u2022 ${fAT.label} - ${String.format("%.2f", fAT.quantity)} ${fAT.unit}\n"
-            nutrients += "\u2022 ${cHOCDF.label} - ${String.format("%.2f", cHOCDF.quantity)} ${cHOCDF.unit}\n"
-            nutrients += "\u2022 ${sUGAR.label} - ${String.format("%.2f", sUGAR.quantity)} ${sUGAR.unit}\n"
-            nutrients += "\u2022 ${pROCNT.label} - ${String.format("%.2f", pROCNT.quantity)} ${pROCNT.unit}\n"
-            nutrients += "\u2022 ${cHOLE.label} - ${String.format("%.2f", cHOLE.quantity)} ${cHOLE.unit}\n"
-            nutrients += "\u2022 ${cA.label} - ${String.format("%.2f", cA.quantity)} ${cA.unit}"
+            nutrients += "\u2022 ${energy.label} - ${String.format("%.2f", energy.quantity)} ${energy.unit}\n"
+            nutrients += "\u2022 ${fat.label} - ${String.format("%.2f", fat.quantity)} ${fat.unit}\n"
+            nutrients += "\u2022 ${carbs.label} - ${String.format("%.2f", carbs.quantity)} ${carbs.unit}\n"
+            nutrients += "\u2022 ${sugar.label} - ${String.format("%.2f", sugar.quantity)} ${sugar.unit}\n"
+            nutrients += "\u2022 ${protein.label} - ${String.format("%.2f", protein.quantity)} ${protein.unit}\n"
+            nutrients += "\u2022 ${cholesterol.label} - ${String.format("%.2f", cholesterol.quantity)} ${cholesterol.unit}\n"
+            nutrients += "\u2022 ${calcium.label} - ${String.format("%.2f", calcium.quantity)} ${calcium.unit}"
         }
 
         binding.apply {

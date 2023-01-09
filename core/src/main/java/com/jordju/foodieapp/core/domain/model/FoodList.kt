@@ -40,66 +40,59 @@ data class RecipeEntity(
 
 @Parcelize
 data class TotalNutrientsEntity(
-    val eNERCKCAL: eNERCKCALEntity,
-    val fAT: fATEntity,
-    val cHOCDF: cHOCDFEntity,
-    val sUGAR: sUGAREntity,
-    val pROCNT: pROCNTEntity,
-    val cHOLE: cHOLEEntity,
-    val cA: cAEntity,
+    val energy: EnergyEntity,
+    val fat: FatEntity,
+    val carbs: CarbsEntity,
+    val sugar: SugarEntity,
+    val protein: ProteinEntity,
+    val cholesterol: CholesterolEntity,
+    val calcium: CalciumEntity,
 ) : Parcelable
 
 @Parcelize
-data class eNERCKCALEntity(
+data class EnergyEntity(
     var label: String,
     var quantity: Double,
     var unit: String
 ) : Parcelable
 
 @Parcelize
-data class fATEntity(
+data class FatEntity(
     var label: String,
     var quantity: Double,
     var unit: String
 ) : Parcelable
 
 @Parcelize
-data class cHOCDFEntity(
+data class CarbsEntity(
     var label: String,
     var quantity: Double,
     var unit: String
 ) : Parcelable
 
 @Parcelize
-data class cHOCDFNetEntity(
+data class SugarEntity(
     var label: String,
     var quantity: Double,
     var unit: String
 ) : Parcelable
 
 @Parcelize
-data class sUGAREntity(
+data class ProteinEntity(
     var label: String,
     var quantity: Double,
     var unit: String
 ) : Parcelable
 
 @Parcelize
-data class pROCNTEntity(
+data class CholesterolEntity(
     var label: String,
     var quantity: Double,
     var unit: String
 ) : Parcelable
 
 @Parcelize
-data class cHOLEEntity(
-    var label: String,
-    var quantity: Double,
-    var unit: String
-) : Parcelable
-
-@Parcelize
-data class cAEntity(
+data class CalciumEntity(
     var label: String,
     var quantity: Double,
     var unit: String
