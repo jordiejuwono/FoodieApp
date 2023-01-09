@@ -6,7 +6,7 @@ import com.jordju.foodieapp.core.domain.model.FoodList
 import kotlinx.coroutines.flow.Flow
 
 interface FoodieRepository {
-    fun getFoodList(): Flow<Resource<FoodList>>
+    fun getFoodList(query: String): Flow<Resource<FoodList>>
 
-    fun getFoodDetails(detailLink: String): Flow<Resource<FoodDetails>>
+    fun getFoodDetails(detailId: String): Flow<Resource<FoodDetails>>
 }

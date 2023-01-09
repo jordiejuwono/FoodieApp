@@ -16,10 +16,10 @@ import javax.inject.Singleton
 class FoodieRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
 ): FoodieRepository {
-    override fun getFoodList(): Flow<Resource<FoodList>> =
+    override fun getFoodList(query: String): Flow<Resource<FoodList>> =
         flow {
             emit(Resource.Loading())
-            val remoteCalls = remoteDataSource.getFoodList()
+            val remoteCalls = remoteDataSource.getFoodList(query)
             remoteCalls.collect {
                 when(it) {
                     is ApiResponse.Success -> {
@@ -35,10 +35,10 @@ class FoodieRepositoryImpl @Inject constructor(
             }
         }
 
-    override fun getFoodDetails(detailLink: String): Flow<Resource<FoodDetails>> =
+    override fun getFoodDetails(detailId: String): Flow<Resource<FoodDetails>> =
         flow {
             emit(Resource.Loading())
-            val remoteCalls = remoteDataSource.getFoodDetails(detailLink)
+            val remoteCalls = remoteDataSource.getFoodDetails(detailId)
             remoteCalls.collect {
                 when(it) {
                     is ApiResponse.Success -> {

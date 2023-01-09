@@ -46,8 +46,91 @@ object DataMapper {
             calories = response?.calories ?: 0.0,
             image = response?.image ?: "",
             ingredients = mapIngredientListToEntities(response?.ingredients),
-            label = response?.label ?: ""
+            label = response?.label ?: "",
+            totalTime = response?.totalTime?.toInt() ?: 0,
+            totalNutrients = mapTotalNutrientsResponseToEntity(response?.totalNutrients)
         )
+
+    private fun mapTotalNutrientsResponseToEntity(response: TotalNutrients?): TotalNutrientsEntity =
+        TotalNutrientsEntity(
+            energy = mapEnergyToEntity(response?.eNERCKCAL),
+            fat = mapFatToEntity(response?.fAT),
+            carbs = mapCarbsToEntity(response?.cHOCDF),
+            sugar = mapSugarToEntity(response?.sUGAR),
+            protein = mapProteinToEntity(response?.pROCNT),
+            cholesterol = mapCholesterolToEntity(response?.cHOLE),
+            calcium = mapCalciumToEntity(response?.cA),
+        )
+
+    private fun mapCalciumToEntity(
+        response: CA?
+    ): CalciumEntity {
+        return CalciumEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapCholesterolToEntity(
+        response: CHOLE?
+    ): CholesterolEntity {
+        return CholesterolEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapProteinToEntity(
+        response: PROCNT?
+    ): ProteinEntity {
+        return ProteinEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapSugarToEntity(
+        response: SUGAR?
+    ): SugarEntity {
+        return SugarEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapCarbsToEntity(
+        response: CHOCDF?
+    ): CarbsEntity {
+        return CarbsEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapEnergyToEntity(
+        response: ENERCKCAL?
+    ): EnergyEntity {
+        return EnergyEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapFatToEntity(
+        response: FAT?
+    ): FatEntity {
+        return FatEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
 
 
     private fun mapIngredientListToEntities(responseList: List<Ingredient>?): List<IngredientsEntity> {

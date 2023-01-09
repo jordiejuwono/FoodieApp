@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/background_color"
+    tools:context=".home.HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/text_header"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_search_view"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search for food recipes..." />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_categories"
+        android:paddingHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/text_categories"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/text_color"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/ll_header"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontal_scroll"
+        android:layout_width="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/tv_categories">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedChip="@id/chip_all"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_all"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_chicken"
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_chicken"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_fish"
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_fish"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_noodle"
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_noodle"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_beef"
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_beef"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_spaghetti"
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_spaghetti"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_salad"
+                style="@style/DisableChipDrawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_salad"
+                android:textColor="@drawable/bg_chip_text_state"
+                app:chipBackgroundColor="@drawable/bg_chip_click_state" />
+
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_scroll">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_food_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
+            tools:listitem="@layout/item_food_list" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

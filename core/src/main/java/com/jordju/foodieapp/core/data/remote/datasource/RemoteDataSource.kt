@@ -11,10 +11,10 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
-    suspend fun getFoodList(): Flow<ApiResponse<FoodListResponse>> {
+    suspend fun getFoodList(query: String): Flow<ApiResponse<FoodListResponse>> {
         return flow {
             try {
-                val response = apiService.getFoodList()
+                val response = apiService.getFoodList(query)
                 if (response.hits?.isNotEmpty() == true) {
                     emit(ApiResponse.Success(response))
                 } else {
@@ -25,10 +25,10 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
             }
         }
     }
-    suspend fun getFoodDetails(detailLink: String): Flow<ApiResponse<FoodDetailsResponse>> {
+    suspend fun getFoodDetails(detailId: String): Flow<ApiResponse<FoodDetailsResponse>> {
         return flow {
             try {
-                val response = apiService.getFoodDetails(detailLink)
+                val response = apiService.getFoodDetails(detailId)
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))

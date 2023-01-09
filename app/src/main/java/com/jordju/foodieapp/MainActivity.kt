@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.ActivityMainBinding
+import com.jordju.foodieapp.home.HomeFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -17,5 +18,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fl_container, HomeFragment())
+                .commit()
+        }
+
     }
 }

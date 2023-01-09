@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jordi/kotlin dicoding/Android Developer Expert/Submissions/FoodieApp/app/src/main/res/drawable/bg_search_view.xml" value="0.102" />
         <entry key="..\:/Users/jordi/kotlin dicoding/Android Developer Expert/Submissions/FoodieApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/jordi/kotlin dicoding/Android Developer Expert/Submissions/FoodieApp/app/src/main/res/menu/bottom_nav.xml" value="0.25" />
       </map>
     </option>
   </component>
