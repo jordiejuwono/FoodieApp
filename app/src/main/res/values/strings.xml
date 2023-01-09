@@ -13,4 +13,5 @@
     <string name="text_salad">Salad</string>
     <string name="text_categories">Categories</string>
     <string name="text_header">Let\'s Search for\nDelicious Foods Recipe</string>
+    <string name="food_time">%s minutes</string>
 </resources>

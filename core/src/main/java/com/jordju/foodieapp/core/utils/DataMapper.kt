@@ -46,7 +46,8 @@ object DataMapper {
             calories = response?.calories ?: 0.0,
             image = response?.image ?: "",
             ingredients = mapIngredientListToEntities(response?.ingredients),
-            label = response?.label ?: ""
+            label = response?.label ?: "",
+            totalTime = response?.totalTime?.toInt() ?: 0,
         )
 
 

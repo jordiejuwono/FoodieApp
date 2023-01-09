@@ -6,10 +6,14 @@ import android.os.Build.VERSION
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.jordju.foodieapp.MyApplication
+import com.jordju.foodieapp.R
 import com.jordju.foodieapp.core.data.Resource
+import com.jordju.foodieapp.core.domain.model.FoodDetails
 import com.jordju.foodieapp.core.domain.model.HitEntity
+import com.jordju.foodieapp.core.domain.model.IngredientsEntity
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.ActivityDetailBinding
 import com.jordju.foodieapp.home.HomeFragment
@@ -32,7 +36,41 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+        backPressListener()
+
         observeData()
+    }
+
+    private fun backPressListener() {
+        binding.flBack.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun bindData(details: Resource<FoodDetails>) {
+        var ingredients = ""
+        val ingredientsList = details.data?.recipe?.ingredients
+        ingredientsList?.map {
+            ingredients += "\u2022 ${it.text}\n"
+        }
+
+        binding.apply {
+            Glide.with(this@DetailActivity)
+                .load(details.data?.recipe?.image)
+                .into(ivFoodImage)
+            tvFoodTitle.text = details.data?.recipe?.label
+            tvIngredientsList.text = ingredients
+            tvTime.text = getString(R.string.food_time, details.data?.recipe?.totalTime ?: "-")
+        }
+
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            svScrollView.isVisible = !isLoading
+            pbLoading.isVisible = isLoading
+        }
     }
 
     private fun observeData() {
@@ -48,18 +86,14 @@ class DetailActivity : AppCompatActivity() {
         viewModel.getFoodDetails(detailId ?: "").observe(this) {
             when (it) {
                 is Resource.Loading -> {
-
+                    showLoading(true)
                 }
                 is Resource.Success -> {
-                    binding.apply {
-                        Glide.with(this@DetailActivity)
-                            .load(it.data?.recipe?.image)
-                            .into(ivFoodImage)
-                        tvFoodTitle.text = it.data?.recipe?.label
-                    }
+                    showLoading(false)
+                    bindData(it)
                 }
                 is Resource.Error -> {
-
+                    showLoading(false)
                 }
             }
         }

@@ -32,6 +32,7 @@ data class RecipeEntity(
     val image: String,
     val ingredients: List<IngredientsEntity>,
     val label: String,
+    val totalTime: Int,
 ): Parcelable
 
 @Parcelize

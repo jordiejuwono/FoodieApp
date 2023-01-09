@@ -14,6 +14,7 @@ import com.jordju.foodieapp.core.domain.model.HitEntity
 import com.jordju.foodieapp.core.ui.FoodListAdapter
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.ActivitySearchResultBinding
+import com.jordju.foodieapp.detail.DetailActivity
 import javax.inject.Inject
 
 class SearchResultActivity : AppCompatActivity() {
@@ -62,7 +63,7 @@ class SearchResultActivity : AppCompatActivity() {
     private fun getSearchResult() {
         val adapter = FoodListAdapter(object : FoodListAdapter.OnClickListeners {
             override fun onClick(item: HitEntity) {
-                TODO("Not yet implemented")
+                DetailActivity.startActivity(this@SearchResultActivity, item)
             }
 
         })
