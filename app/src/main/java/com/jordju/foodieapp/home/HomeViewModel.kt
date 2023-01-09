@@ -12,9 +12,9 @@ class HomeViewModel @Inject constructor(private val getFoodListUseCase: GetFoodL
     val getFoodListResult: LiveData<Resource<FoodList>>
         get() = foodList
 
-    fun getFoodList() {
+    fun getFoodList(query: String) {
         viewModelScope.launch {
-            getFoodListUseCase.execute().collect {
+            getFoodListUseCase.execute(query).collect {
                 foodList.value = it
             }
         }

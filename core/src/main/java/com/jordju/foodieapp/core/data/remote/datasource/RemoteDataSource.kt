@@ -11,10 +11,10 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
-    suspend fun getFoodList(): Flow<ApiResponse<FoodListResponse>> {
+    suspend fun getFoodList(query: String): Flow<ApiResponse<FoodListResponse>> {
         return flow {
             try {
-                val response = apiService.getFoodList()
+                val response = apiService.getFoodList(query)
                 if (response.hits?.isNotEmpty() == true) {
                     emit(ApiResponse.Success(response))
                 } else {

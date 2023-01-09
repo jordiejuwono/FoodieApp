@@ -1,23 +1,25 @@
 package com.jordju.foodieapp.home
 
+import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jordju.foodieapp.MyApplication
-import com.jordju.foodieapp.R
 import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.domain.model.HitEntity
 import com.jordju.foodieapp.core.ui.FoodListAdapter
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.FragmentHomeBinding
 import com.jordju.foodieapp.detail.DetailActivity
+import com.jordju.foodieapp.searchresult.SearchResultActivity
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
@@ -47,13 +49,67 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeViewModel.getFoodList()
+        getData()
         setupRecyclerView()
+        searchData()
+        setChipClickListeners()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getData(query: String = "") {
+        homeViewModel.getFoodList(query)
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun searchData() {
+        binding.svSearch.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query?.isNotEmpty() == true){
+                    SearchResultActivity.startActivity(requireContext(), query.toString())
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // do nothing
+                return false
+            }
+
+        })
+    }
+
+    private fun setChipClickListeners() {
+        binding.apply {
+            chipAll.setOnClickListener {
+                getData()
+            }
+            chipChicken.setOnClickListener {
+                getData("chicken")
+            }
+            chipFish.setOnClickListener {
+                getData("fish")
+            }
+            chipNoodle.setOnClickListener {
+                getData("noodle")
+            }
+            chipBeef.setOnClickListener {
+                getData("beef")
+            }
+            chipSpaghetti.setOnClickListener {
+                getData("spaghetti")
+            }
+            chipSalad.setOnClickListener {
+                getData("salad")
+            }
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
