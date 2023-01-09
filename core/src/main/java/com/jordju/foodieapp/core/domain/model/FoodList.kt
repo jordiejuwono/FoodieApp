@@ -1,29 +1,31 @@
 package com.jordju.foodieapp.core.domain.model
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import com.jordju.foodieapp.core.data.remote.model.response.list.*
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FoodList(
     val count: Int,
     val hits: List<HitEntity>
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class HitEntity(
     val links: LinksEntity,
     val recipe: RecipeEntity,
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class LinksEntity(
     val self: SelfEntity,
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class SelfEntity(
     val href: String,
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class RecipeEntity(
@@ -33,7 +35,75 @@ data class RecipeEntity(
     val ingredients: List<IngredientsEntity>,
     val label: String,
     val totalTime: Int,
-): Parcelable
+    val totalNutrients: TotalNutrientsEntity
+) : Parcelable
+
+@Parcelize
+data class TotalNutrientsEntity(
+    val eNERCKCAL: eNERCKCALEntity,
+    val fAT: fATEntity,
+    val cHOCDF: cHOCDFEntity,
+    val sUGAR: sUGAREntity,
+    val pROCNT: pROCNTEntity,
+    val cHOLE: cHOLEEntity,
+    val cA: cAEntity,
+) : Parcelable
+
+@Parcelize
+data class eNERCKCALEntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
+
+@Parcelize
+data class fATEntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
+
+@Parcelize
+data class cHOCDFEntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
+
+@Parcelize
+data class cHOCDFNetEntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
+
+@Parcelize
+data class sUGAREntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
+
+@Parcelize
+data class pROCNTEntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
+
+@Parcelize
+data class cHOLEEntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
+
+@Parcelize
+data class cAEntity(
+    var label: String,
+    var quantity: Double,
+    var unit: String
+) : Parcelable
 
 @Parcelize
 data class IngredientsEntity(
@@ -45,4 +115,4 @@ data class IngredientsEntity(
     val quantity: Double,
     val text: String,
     val weight: Double
-): Parcelable
+) : Parcelable

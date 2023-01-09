@@ -11,9 +11,7 @@ import com.bumptech.glide.Glide
 import com.jordju.foodieapp.MyApplication
 import com.jordju.foodieapp.R
 import com.jordju.foodieapp.core.data.Resource
-import com.jordju.foodieapp.core.domain.model.FoodDetails
-import com.jordju.foodieapp.core.domain.model.HitEntity
-import com.jordju.foodieapp.core.domain.model.IngredientsEntity
+import com.jordju.foodieapp.core.domain.model.*
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.ActivityDetailBinding
 import com.jordju.foodieapp.home.HomeFragment
@@ -50,9 +48,21 @@ class DetailActivity : AppCompatActivity() {
 
     private fun bindData(details: Resource<FoodDetails>) {
         var ingredients = ""
+        var nutrients = ""
         val ingredientsList = details.data?.recipe?.ingredients
+        val nutrientsList = details.data?.recipe?.totalNutrients
+
         ingredientsList?.map {
             ingredients += "\u2022 ${it.text}\n"
+        }
+        nutrientsList?.apply {
+            nutrients += "\u2022 ${eNERCKCAL.label} - ${String.format("%.2f", eNERCKCAL.quantity)} ${eNERCKCAL.unit}\n"
+            nutrients += "\u2022 ${fAT.label} - ${String.format("%.2f", fAT.quantity)} ${fAT.unit}\n"
+            nutrients += "\u2022 ${cHOCDF.label} - ${String.format("%.2f", cHOCDF.quantity)} ${cHOCDF.unit}\n"
+            nutrients += "\u2022 ${sUGAR.label} - ${String.format("%.2f", sUGAR.quantity)} ${sUGAR.unit}\n"
+            nutrients += "\u2022 ${pROCNT.label} - ${String.format("%.2f", pROCNT.quantity)} ${pROCNT.unit}\n"
+            nutrients += "\u2022 ${cHOLE.label} - ${String.format("%.2f", cHOLE.quantity)} ${cHOLE.unit}\n"
+            nutrients += "\u2022 ${cA.label} - ${String.format("%.2f", cA.quantity)} ${cA.unit}"
         }
 
         binding.apply {
@@ -61,7 +71,13 @@ class DetailActivity : AppCompatActivity() {
                 .into(ivFoodImage)
             tvFoodTitle.text = details.data?.recipe?.label
             tvIngredientsList.text = ingredients
-            tvTime.text = getString(R.string.food_time, details.data?.recipe?.totalTime ?: "-")
+            tvTime.text =
+                (if (details.data?.recipe?.totalTime != 0) {
+                    getString(R.string.food_time, details.data?.recipe?.totalTime ?: "-")
+                } else {
+                    "-"
+                }).toString()
+            tvNutrientsList.text = nutrients
         }
 
     }

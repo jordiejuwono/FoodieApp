@@ -48,7 +48,89 @@ object DataMapper {
             ingredients = mapIngredientListToEntities(response?.ingredients),
             label = response?.label ?: "",
             totalTime = response?.totalTime?.toInt() ?: 0,
+            totalNutrients = mapTotalNutrientsResponseToEntity(response?.totalNutrients)
         )
+
+    private fun mapTotalNutrientsResponseToEntity(response: TotalNutrients?): TotalNutrientsEntity =
+        TotalNutrientsEntity(
+            eNERCKCAL = mapEnergyToEntity(response?.eNERCKCAL),
+            fAT = mapFatToEntity(response?.fAT),
+            cHOCDF = mapCarbsToEntity(response?.cHOCDF),
+            sUGAR = mapSugarToEntity(response?.sUGAR),
+            pROCNT = mapProteinToEntity(response?.pROCNT),
+            cHOLE = mapCholesterolToEntity(response?.cHOLE),
+            cA = mapCalciumToEntity(response?.cA),
+        )
+
+    private fun mapCalciumToEntity(
+        response: CA?
+    ): cAEntity {
+        return cAEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapCholesterolToEntity(
+        response: CHOLE?
+    ): cHOLEEntity {
+        return cHOLEEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapProteinToEntity(
+        response: PROCNT?
+    ): pROCNTEntity {
+        return pROCNTEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapSugarToEntity(
+        response: SUGAR?
+    ): sUGAREntity {
+        return sUGAREntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapCarbsToEntity(
+        response: CHOCDF?
+    ): cHOCDFEntity {
+        return cHOCDFEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapEnergyToEntity(
+        response: ENERCKCAL?
+    ): eNERCKCALEntity {
+        return eNERCKCALEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
+
+    private fun mapFatToEntity(
+        response: FAT?
+    ): fATEntity {
+        return fATEntity(
+            label = response?.label ?: "",
+            quantity = response?.quantity ?: 0.0,
+            unit = response?.unit ?: "",
+        )
+    }
 
 
     private fun mapIngredientListToEntities(responseList: List<Ingredient>?): List<IngredientsEntity> {

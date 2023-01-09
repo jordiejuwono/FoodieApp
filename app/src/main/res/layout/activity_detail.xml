@@ -13,7 +13,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_food_image"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Ingredients"
+                    android:text="@string/text_ingredients"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@id/tv_time" />
@@ -88,6 +88,25 @@
                     android:textColor="@color/text_color"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/tv_ingredients" />
+
+                <TextView
+                    android:id="@+id/tv_nutrients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/text_nutrients"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ingredients_list" />
+
+                <TextView
+                    android:id="@+id/tv_nutrients_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nutrients" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
