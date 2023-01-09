@@ -84,8 +84,9 @@
                     android:id="@+id/tv_ingredients_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:lineSpacingExtra="1dp"
+                    tools:text="ingredients 1\ningredients 2"
                     android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/text_color"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/tv_ingredients" />
 
@@ -94,6 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
+                    android:layout_marginTop="16dp"
                     android:text="@string/text_nutrients"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
@@ -103,8 +105,9 @@
                     android:id="@+id/tv_nutrients_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    tools:text="@tools:sample/lorem/random"
+                    android:lineSpacingExtra="1dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/text_color"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/tv_nutrients" />
             </androidx.constraintlayout.widget.ConstraintLayout>

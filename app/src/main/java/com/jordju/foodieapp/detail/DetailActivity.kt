@@ -70,7 +70,7 @@ class DetailActivity : AppCompatActivity() {
                 .load(details.data?.recipe?.image)
                 .into(ivFoodImage)
             tvFoodTitle.text = details.data?.recipe?.label
-            tvIngredientsList.text = ingredients
+            tvIngredientsList.text = ingredients.substring(0, ingredients.length - 1)
             tvTime.text =
                 (if (details.data?.recipe?.totalTime != 0) {
                     getString(R.string.food_time, details.data?.recipe?.totalTime ?: "-")
