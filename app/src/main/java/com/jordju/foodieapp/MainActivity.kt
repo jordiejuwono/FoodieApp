@@ -2,12 +2,9 @@ package com.jordju.foodieapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import com.jordju.foodieapp.core.data.Resource
-import com.jordju.foodieapp.core.ui.ViewModelFactory
+import androidx.fragment.app.Fragment
 import com.jordju.foodieapp.databinding.ActivityMainBinding
 import com.jordju.foodieapp.home.HomeFragment
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +22,22 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fl_container, HomeFragment())
                 .commit()
+        }
+
+        binding.bottomNav.setOnItemSelectedListener { menu ->
+            when (menu.itemId) {
+                R.id.menu_home -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fl_container, HomeFragment())
+                        .commit()
+                }
+                R.id.menu_favorite -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fl_container, Class.forName("com.jordju.foodieapp.favorite.ui.FavoriteFragment").newInstance() as Fragment)
+                        .commit()
+                }
+            }
+            return@setOnItemSelectedListener true
         }
 
     }

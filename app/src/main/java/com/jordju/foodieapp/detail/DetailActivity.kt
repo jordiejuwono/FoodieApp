@@ -8,9 +8,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jordju.foodieapp.MyApplication
 import com.jordju.foodieapp.R
 import com.jordju.foodieapp.core.data.Resource
+import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.domain.model.*
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.ActivityDetailBinding
@@ -36,6 +38,7 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         backPressListener()
+        insertFoodToFavorite()
 
         observeData()
     }
@@ -43,6 +46,34 @@ class DetailActivity : AppCompatActivity() {
     private fun backPressListener() {
         binding.flBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun insertFoodToFavorite() {
+        val detailData = if (VERSION.SDK_INT >= 33) {
+            intent.getParcelableExtra(DETAIL_URI, HitEntity::class.java)
+        } else {
+            intent.getParcelableExtra(DETAIL_URI)
+        }
+        val uri = detailData?.recipe?.uri
+        val detailId = uri?.substring(uri.indexOf("#") + 1)
+
+        binding.flFavorite.setOnClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Add to Favorite")
+                .setMessage("Do you want to add ${detailData?.recipe?.label} to favorite?")
+                .setPositiveButton("YES") { dialog, _ ->
+                    viewModel.insertFoodToFavorite(FoodEntity(
+                        recipeId = detailId ?: "",
+                        name = detailData?.recipe?.label ?: "",
+                        image = detailData?.recipe?.image ?: ""
+                    ))
+                    dialog.dismiss()
+                }
+                .setNegativeButton("NO") { dialog, _ ->
+                    dialog.dismiss()
+                }.show()
+
         }
     }
 
@@ -93,7 +124,7 @@ class DetailActivity : AppCompatActivity() {
         val detailData = if (VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(DETAIL_URI, HitEntity::class.java)
         } else {
-            intent.getParcelableExtra<HitEntity>(DETAIL_URI)
+            intent.getParcelableExtra(DETAIL_URI)
         }
 
         val uri = detailData?.recipe?.uri
@@ -119,6 +150,12 @@ class DetailActivity : AppCompatActivity() {
         private const val DETAIL_URI = "DETAIL_URI"
 
         fun startActivity(context: Context, data: HitEntity) {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(DETAIL_URI, data)
+            context.startActivity(intent)
+        }
+
+        fun startActivityFavorite(context: Context, data: FoodEntity) {
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra(DETAIL_URI, data)
             context.startActivity(intent)

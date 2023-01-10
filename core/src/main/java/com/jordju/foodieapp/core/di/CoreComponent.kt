@@ -1,10 +1,11 @@
 package com.jordju.foodieapp.core.di
 
 import android.content.Context
-import com.jordju.foodieapp.core.data.remote.repository.FoodieRepositoryImpl
+import com.jordju.foodieapp.core.data.repository.FoodieRepositoryImpl
 import com.jordju.foodieapp.core.domain.repository.FoodieRepository
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Provides
 import javax.inject.Singleton
 
 @Singleton

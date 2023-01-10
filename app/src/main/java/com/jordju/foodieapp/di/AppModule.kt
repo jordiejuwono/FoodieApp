@@ -1,10 +1,11 @@
 package com.jordju.foodieapp.di
 
 import com.jordju.foodieapp.core.domain.repository.FoodieRepository
-import com.jordju.foodieapp.core.domain.usecase.GetFoodDetailsUseCase
-import com.jordju.foodieapp.core.domain.usecase.GetFoodListUseCase
+import com.jordju.foodieapp.core.domain.usecase.*
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class AppModule {
@@ -15,4 +16,9 @@ class AppModule {
     @Provides
     fun provideGetFoodDetailsUseCase(foodieRepository: FoodieRepository) = GetFoodDetailsUseCase(foodieRepository)
 
+    @Provides
+    fun provideInsertFoodToFavorite(foodieRepository: FoodieRepository) = InsertFoodToDatabaseUseCase(foodieRepository)
+
+    @Provides
+    fun provideGetAllFavoriteFoods(foodieRepository: FoodieRepository) = GetAllSavedFoodsUseCase(foodieRepository)
 }

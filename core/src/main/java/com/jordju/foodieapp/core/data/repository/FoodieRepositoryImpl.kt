@@ -1,6 +1,8 @@
-package com.jordju.foodieapp.core.data.remote.repository
+package com.jordju.foodieapp.core.data.repository
 
 import com.jordju.foodieapp.core.data.Resource
+import com.jordju.foodieapp.core.data.local.datasource.LocalDataSource
+import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.data.remote.datasource.RemoteDataSource
 import com.jordju.foodieapp.core.data.remote.network.ApiResponse
 import com.jordju.foodieapp.core.domain.model.FoodDetails
@@ -8,6 +10,8 @@ import com.jordju.foodieapp.core.domain.model.FoodList
 import com.jordju.foodieapp.core.domain.repository.FoodieRepository
 import com.jordju.foodieapp.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,6 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class FoodieRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
 ): FoodieRepository {
     override fun getFoodList(query: String): Flow<Resource<FoodList>> =
         flow {
@@ -53,4 +58,25 @@ class FoodieRepositoryImpl @Inject constructor(
                 }
             }
         }
+
+    override fun getAllSavedFoods(): Flow<Resource<List<FoodEntity>>> =
+        flow {
+            emit(Resource.Loading())
+            val localData = localDataSource.getAllSavedFoods()
+            localData
+                .catch {
+                    emit(Resource.Error(it.message))
+                }
+                .collect {
+                emit(Resource.Success(it))
+            }
+        }
+
+    override suspend fun insertFoodToFavorite(food: FoodEntity) {
+        localDataSource.insertFoodToFavorite(food)
+    }
+
+    override suspend fun deleteFoodFromFavorite(food: FoodEntity) {
+        localDataSource.deleteFoodFromFavorite(food)
+    }
 }

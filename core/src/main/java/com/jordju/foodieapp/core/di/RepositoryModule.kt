@@ -1,11 +1,11 @@
 package com.jordju.foodieapp.core.di
 
-import com.jordju.foodieapp.core.data.remote.repository.FoodieRepositoryImpl
+import com.jordju.foodieapp.core.data.repository.FoodieRepositoryImpl
 import com.jordju.foodieapp.core.domain.repository.FoodieRepository
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class, DatabaseModule::class])
 abstract class RepositoryModule {
 
  @Binds

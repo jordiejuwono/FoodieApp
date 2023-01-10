@@ -37,6 +37,21 @@
                     app:tint="@color/white" />
             </FrameLayout>
 
+            <FrameLayout
+                android:id="@+id/fl_favorite"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="16dp"
+                app:layout_constraintEnd_toEndOf="@id/iv_food_image"
+                app:layout_constraintTop_toTopOf="@id/iv_food_image">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_favorite_24"
+                    app:tint="@color/white" />
+            </FrameLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
