@@ -19,6 +19,4 @@ class AppModule {
     @Provides
     fun provideInsertFoodToFavorite(foodieRepository: FoodieRepository) = InsertFoodToDatabaseUseCase(foodieRepository)
 
-    @Provides
-    fun provideGetAllFavoriteFoods(foodieRepository: FoodieRepository) = GetAllSavedFoodsUseCase(foodieRepository)
 }
