@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface FoodieUseCase {
     fun getAllSavedFoods(): Flow<Resource<List<FoodEntity>>>
+    suspend fun deleteSavedFood(foodEntity: FoodEntity)
 }

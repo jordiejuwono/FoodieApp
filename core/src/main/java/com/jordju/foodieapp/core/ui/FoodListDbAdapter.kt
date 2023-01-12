@@ -2,6 +2,7 @@ package com.jordju.foodieapp.core.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jordju.foodieapp.core.data.local.entity.FoodEntity
@@ -14,6 +15,7 @@ class FoodListDbAdapter(private val onClickListener: OnClickListeners) : Recycle
 
     interface OnClickListeners {
         fun onClick(item: FoodEntity)
+        fun onDeleteClick(item: FoodEntity)
     }
 
     fun setData(newData: List<FoodEntity>?) {
@@ -23,7 +25,7 @@ class FoodListDbAdapter(private val onClickListener: OnClickListeners) : Recycle
         notifyDataSetChanged()
     }
 
-    class ListViewHolder(private val binding: ItemFoodListBinding) :
+    class ListViewHolder(val binding: ItemFoodListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: FoodEntity) {
             with(binding) {
@@ -31,6 +33,7 @@ class FoodListDbAdapter(private val onClickListener: OnClickListeners) : Recycle
                     .load(data.image)
                     .into(ivFoodImage)
                 tvFoodTitle.text = data.name
+                ivDelete.isVisible = true
             }
         }
     }
@@ -49,6 +52,9 @@ class FoodListDbAdapter(private val onClickListener: OnClickListeners) : Recycle
         holder.bind(items[position])
         holder.itemView.setOnClickListener {
             onClickListener.onClick(items[position])
+        }
+        holder.binding.ivDelete.setOnClickListener {
+            onClickListener.onDeleteClick(items[position])
         }
     }
 

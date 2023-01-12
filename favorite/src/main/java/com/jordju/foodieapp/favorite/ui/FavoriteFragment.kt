@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jordju.foodieapp.MyApplication
 import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.data.local.entity.FoodEntity
@@ -64,14 +67,27 @@ class FavoriteFragment : Fragment() {
                 startActivity(intent)
             }
 
+            override fun onDeleteClick(item: FoodEntity) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Delete from Favorite")
+                    .setMessage("Do you want to delete ${item.name} from favorite?")
+                    .setNegativeButton("NO") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton("YES") { dialog, _ ->
+                        favoriteViewModel.deleteFoodFromFavorite(item)
+                        dialog.dismiss()
+                    }
+            }
+
         })
         with(binding.rvFavorites) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(true)
             adapter = foodListAdapter
         }
 
-//         populate recycler view data
+        // populate recycler view data
         favoriteViewModel.getAllSavedFoods().observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {

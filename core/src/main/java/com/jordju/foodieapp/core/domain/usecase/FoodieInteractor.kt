@@ -10,4 +10,8 @@ class FoodieInteractor @Inject constructor(private val foodieRepository: FoodieR
     override fun getAllSavedFoods(): Flow<Resource<List<FoodEntity>>> {
         return foodieRepository.getAllSavedFoods()
     }
+
+    override suspend fun deleteSavedFood(foodEntity: FoodEntity) {
+        return foodieRepository.deleteFoodFromFavorite(foodEntity)
+    }
 }
