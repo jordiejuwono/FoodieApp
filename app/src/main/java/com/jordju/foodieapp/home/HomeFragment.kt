@@ -129,7 +129,10 @@ class HomeFragment : Fragment() {
     private fun setupRecyclerView() {
         val foodListAdapter = FoodListAdapter(object : FoodListAdapter.OnClickListeners {
             override fun onClick(item: HitEntity) {
-                DetailActivity.startActivity(requireContext(), item)
+                val uri = item.recipe.uri
+                val detailId = uri.substring(uri.indexOf("#") + 1)
+
+                DetailActivity.startActivity(requireContext(), detailId)
             }
 
         })

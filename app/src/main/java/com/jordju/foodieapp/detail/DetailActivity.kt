@@ -2,7 +2,6 @@ package com.jordju.foodieapp.detail
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build.VERSION
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -16,7 +15,6 @@ import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.domain.model.*
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.ActivityDetailBinding
-import com.jordju.foodieapp.home.HomeFragment
 import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity() {
@@ -38,8 +36,8 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         backPressListener()
-        insertFoodToFavorite()
 
+        initData()
         observeData()
     }
 
@@ -49,32 +47,10 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun insertFoodToFavorite() {
-        val detailData = if (VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(DETAIL_URI, HitEntity::class.java)
-        } else {
-            intent.getParcelableExtra(DETAIL_URI)
-        }
-        val uri = detailData?.recipe?.uri
-        val detailId = uri?.substring(uri.indexOf("#") + 1)
+    private fun initData() {
+        val detailData = intent.getStringExtra(DETAIL_URI)
 
-        binding.flFavorite.setOnClickListener {
-            MaterialAlertDialogBuilder(this)
-                .setTitle("Add to Favorite")
-                .setMessage("Do you want to add ${detailData?.recipe?.label} to favorite?")
-                .setPositiveButton("YES") { dialog, _ ->
-                    viewModel.insertFoodToFavorite(FoodEntity(
-                        recipeId = detailId ?: "",
-                        name = detailData?.recipe?.label ?: "",
-                        image = detailData?.recipe?.image ?: ""
-                    ))
-                    dialog.dismiss()
-                }
-                .setNegativeButton("NO") { dialog, _ ->
-                    dialog.dismiss()
-                }.show()
-
-        }
+        viewModel.getFoodDetails(detailData ?: "")
     }
 
     private fun bindData(details: Resource<FoodDetails>) {
@@ -82,6 +58,8 @@ class DetailActivity : AppCompatActivity() {
         var nutrients = ""
         val ingredientsList = details.data?.recipe?.ingredients
         val nutrientsList = details.data?.recipe?.totalNutrients
+        val uri = details.data?.recipe?.uri
+        val detailId = uri?.substring(uri.indexOf("#") + 1)
 
         ingredientsList?.map {
             ingredients += "\u2022 ${it.text}\n"
@@ -109,8 +87,24 @@ class DetailActivity : AppCompatActivity() {
                     "-"
                 }).toString()
             tvNutrientsList.text = nutrients
-        }
+            flFavorite.setOnClickListener {
+                MaterialAlertDialogBuilder(this@DetailActivity)
+                    .setTitle("Add to Favorite")
+                    .setMessage("Do you want to add ${details.data?.recipe?.label} to favorite?")
+                    .setPositiveButton("YES") { dialog, _ ->
+                        viewModel.insertFoodToFavorite(FoodEntity(
+                            recipeId = detailId ?: "",
+                            name = details.data?.recipe?.label ?: "",
+                            image = details.data?.recipe?.image ?: ""
+                        ))
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("NO") { dialog, _ ->
+                        dialog.dismiss()
+                    }.show()
 
+            }
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -121,16 +115,8 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        val detailData = if (VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(DETAIL_URI, HitEntity::class.java)
-        } else {
-            intent.getParcelableExtra(DETAIL_URI)
-        }
 
-        val uri = detailData?.recipe?.uri
-        val detailId = uri?.substring(uri.indexOf("#") + 1)
-
-        viewModel.getFoodDetails(detailId ?: "").observe(this) {
+        viewModel.foodDetails.observe(this) {
             when (it) {
                 is Resource.Loading -> {
                     showLoading(true)
@@ -149,13 +135,7 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         private const val DETAIL_URI = "DETAIL_URI"
 
-        fun startActivity(context: Context, data: HitEntity) {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(DETAIL_URI, data)
-            context.startActivity(intent)
-        }
-
-        fun startActivityFavorite(context: Context, data: FoodEntity) {
+        fun startActivity(context: Context, data: String) {
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra(DETAIL_URI, data)
             context.startActivity(intent)

@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.jordju.foodieapp.MyApplication
 import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.domain.model.HitEntity
@@ -63,7 +62,9 @@ class SearchResultActivity : AppCompatActivity() {
     private fun getSearchResult() {
         val adapter = FoodListAdapter(object : FoodListAdapter.OnClickListeners {
             override fun onClick(item: HitEntity) {
-                DetailActivity.startActivity(this@SearchResultActivity, item)
+                val uri = item.recipe.uri
+                val detailId = uri.substring(uri.indexOf("#") + 1)
+                DetailActivity.startActivity(this@SearchResultActivity, detailId)
             }
 
         })

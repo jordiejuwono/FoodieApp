@@ -8,7 +8,6 @@ import com.jordju.foodieapp.detail.DetailActivity
 import com.jordju.foodieapp.home.HomeFragment
 import com.jordju.foodieapp.searchresult.SearchResultActivity
 import dagger.Component
-import javax.inject.Singleton
 
 @AppScope
 @Component(

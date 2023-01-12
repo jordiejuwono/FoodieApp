@@ -1,6 +1,8 @@
 package com.jordju.foodieapp.favorite.ui
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -56,7 +58,10 @@ class FavoriteFragment : Fragment() {
     private fun setRecyclerView() {
         val foodListAdapter = FoodListDbAdapter(object : FoodListDbAdapter.OnClickListeners {
             override fun onClick(item: FoodEntity) {
-                DetailActivity.startActivityFavorite(requireContext(), item)
+                val uri = Uri.parse("foodieapp://detail")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.putExtra("DETAIL_URI", item.recipeId)
+                startActivity(intent)
             }
 
         })
