@@ -89,9 +89,9 @@ class DetailActivity : AppCompatActivity() {
             tvNutrientsList.text = nutrients
             flFavorite.setOnClickListener {
                 MaterialAlertDialogBuilder(this@DetailActivity)
-                    .setTitle("Add to Favorite")
-                    .setMessage("Do you want to add ${details.data?.recipe?.label} to favorite?")
-                    .setPositiveButton("YES") { dialog, _ ->
+                    .setTitle(getString(R.string.text_add_favorite))
+                    .setMessage(getString(R.string.text_message_dialog, details.data?.recipe?.label))
+                    .setPositiveButton(getString(R.string.text_yes_dialog)) { dialog, _ ->
                         viewModel.insertFoodToFavorite(FoodEntity(
                             recipeId = detailId ?: "",
                             name = details.data?.recipe?.label ?: "",
@@ -99,7 +99,7 @@ class DetailActivity : AppCompatActivity() {
                         ))
                         dialog.dismiss()
                     }
-                    .setNegativeButton("NO") { dialog, _ ->
+                    .setNegativeButton(getString(R.string.text_no_dialog)) { dialog, _ ->
                         dialog.dismiss()
                     }.show()
 

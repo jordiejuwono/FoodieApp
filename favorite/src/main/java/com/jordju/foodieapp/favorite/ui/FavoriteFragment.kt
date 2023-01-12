@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -18,6 +19,7 @@ import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.ui.FoodListDbAdapter
 import com.jordju.foodieapp.detail.DetailActivity
+import com.jordju.foodieapp.favorite.R
 import com.jordju.foodieapp.favorite.databinding.FragmentFavoriteBinding
 import javax.inject.Inject
 
@@ -69,15 +71,15 @@ class FavoriteFragment : Fragment() {
 
             override fun onDeleteClick(item: FoodEntity) {
                 MaterialAlertDialogBuilder(requireContext())
-                    .setTitle("Delete from Favorite")
-                    .setMessage("Do you want to delete ${item.name} from favorite?")
-                    .setNegativeButton("NO") { dialog, _ ->
+                    .setTitle(getString(R.string.text_delete_dialog))
+                    .setMessage(getString(R.string.text_message_dialog, item.name))
+                    .setNegativeButton(getString(R.string.text_no_dialog)) { dialog, _ ->
                         dialog.dismiss()
                     }
-                    .setPositiveButton("YES") { dialog, _ ->
+                    .setPositiveButton(getString(R.string.text_yes_dialog)) { dialog, _ ->
                         favoriteViewModel.deleteFoodFromFavorite(item)
                         dialog.dismiss()
-                    }
+                    }.create().show()
             }
 
         })
@@ -95,6 +97,7 @@ class FavoriteFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     foodListAdapter.setData(it.data)
+                    binding.tvNoFavorite.isVisible = it.data?.isEmpty() == true
                 }
                 is Resource.Error -> {
 

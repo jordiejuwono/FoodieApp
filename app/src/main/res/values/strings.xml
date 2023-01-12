@@ -2,7 +2,6 @@
     <string name="app_name">FoodieApp</string>
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_all">All</string>
     <string name="text_chicken">Chicken</string>
@@ -16,4 +15,8 @@
     <string name="food_time">%s minutes</string>
     <string name="text_ingredients">Ingredients</string>
     <string name="text_nutrients">Nutrients</string>
+    <string name="text_add_favorite">Add to Favorite</string>
+    <string name="text_message_dialog">Do you want to add %s to favorite?</string>
+    <string name="text_yes_dialog">YES</string>
+    <string name="text_no_dialog">NO</string>
 </resources>
