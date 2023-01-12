@@ -19,4 +19,7 @@ class AppModule {
     @Provides
     fun provideInsertFoodToFavorite(foodieRepository: FoodieRepository) = InsertFoodToDatabaseUseCase(foodieRepository)
 
+    @Provides
+    fun provideFoodieUseCase(foodieRepository: FoodieRepository) = FoodieInteractor(foodieRepository)
+
 }

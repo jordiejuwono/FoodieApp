@@ -3,6 +3,7 @@ package com.jordju.foodieapp.core.di
 import android.content.Context
 import com.jordju.foodieapp.core.data.repository.FoodieRepositoryImpl
 import com.jordju.foodieapp.core.domain.repository.FoodieRepository
+import com.jordju.foodieapp.core.domain.usecase.FoodieUseCase
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Provides
@@ -20,5 +21,6 @@ interface CoreComponent {
     }
 
     fun provideRepository(): FoodieRepository
+    fun provideUseCase(): FoodieUseCase
 
 }

@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.jordju.foodieapp.MyApplication
 import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.ui.FoodListDbAdapter
 import com.jordju.foodieapp.detail.DetailActivity
-import com.jordju.foodieapp.di.FavoriteModuleDependencies
 import com.jordju.foodieapp.favorite.databinding.FragmentFavoriteBinding
 import javax.inject.Inject
 
@@ -38,7 +38,8 @@ class FavoriteFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        (requireActivity().applicationContext as FavoriteModuleDependencies)
+        val appComponent = (activity?.applicationContext as MyApplication).appComponent
+        DaggerFavoriteComponent.factory().create(appComponent).inject(this)
     }
 
 
@@ -65,7 +66,7 @@ class FavoriteFragment : Fragment() {
             adapter = foodListAdapter
         }
 
-        // populate recycler view data
+//         populate recycler view data
         favoriteViewModel.getAllSavedFoods().observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {

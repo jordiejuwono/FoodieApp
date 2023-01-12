@@ -1,24 +1,19 @@
 package com.jordju.foodieapp.favorite.ui
 
-import android.content.Context
-import com.jordju.foodieapp.core.di.CoreComponent
-import com.jordju.foodieapp.core.di.RepositoryModule
-import com.jordju.foodieapp.di.AppModule
-import com.jordju.foodieapp.di.FavoriteModuleDependencies
-import dagger.BindsInstance
+import com.jordju.foodieapp.di.AppComponent
 import dagger.Component
 
 @AppScope
-@Component(dependencies = [FavoriteModuleDependencies::class],)
+@Component(
+    dependencies = [AppComponent::class],
+)
 interface FavoriteComponent {
 
-    fun inject(fragment: FavoriteFragment)
-
-    @Component.Builder
-    interface Builder {
-        fun context(@BindsInstance context: Context): Builder
-        fun appDependencies(favoriteModuleDependencies: FavoriteModuleDependencies): Builder
-        fun build(): FavoriteComponent
+    @Component.Factory
+    interface Factory {
+        fun create(appComponent: AppComponent): FavoriteComponent
     }
+
+    fun inject(fragment: FavoriteFragment)
 
 }
