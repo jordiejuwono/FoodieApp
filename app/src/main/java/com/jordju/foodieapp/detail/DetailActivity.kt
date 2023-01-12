@@ -11,7 +11,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jordju.foodieapp.MyApplication
 import com.jordju.foodieapp.R
 import com.jordju.foodieapp.core.data.Resource
-import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.domain.model.*
 import com.jordju.foodieapp.core.ui.ViewModelFactory
 import com.jordju.foodieapp.databinding.ActivityDetailBinding
@@ -92,7 +91,7 @@ class DetailActivity : AppCompatActivity() {
                     .setTitle(getString(R.string.text_add_favorite))
                     .setMessage(getString(R.string.text_message_dialog, details.data?.recipe?.label))
                     .setPositiveButton(getString(R.string.text_yes_dialog)) { dialog, _ ->
-                        viewModel.insertFoodToFavorite(FoodEntity(
+                        viewModel.insertFoodToFavorite(Food(
                             recipeId = detailId ?: "",
                             name = details.data?.recipe?.label ?: "",
                             image = details.data?.recipe?.image ?: ""

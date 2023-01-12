@@ -7,18 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.databinding.ItemFoodListBinding
-import com.jordju.foodieapp.core.domain.model.HitEntity
+import com.jordju.foodieapp.core.domain.model.Food
 
 class FoodListDbAdapter(private val onClickListener: OnClickListeners) : RecyclerView.Adapter<FoodListDbAdapter.ListViewHolder>() {
 
-    var items = ArrayList<FoodEntity>()
+    var items = ArrayList<Food>()
 
     interface OnClickListeners {
         fun onClick(item: FoodEntity)
         fun onDeleteClick(item: FoodEntity)
     }
 
-    fun setData(newData: List<FoodEntity>?) {
+    fun setData(newData: List<Food>?) {
         if (newData == null) return
         items.clear()
         items.addAll(newData)

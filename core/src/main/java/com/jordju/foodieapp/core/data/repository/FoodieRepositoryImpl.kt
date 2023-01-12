@@ -5,6 +5,7 @@ import com.jordju.foodieapp.core.data.local.datasource.LocalDataSource
 import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.data.remote.datasource.RemoteDataSource
 import com.jordju.foodieapp.core.data.remote.network.ApiResponse
+import com.jordju.foodieapp.core.domain.model.Food
 import com.jordju.foodieapp.core.domain.model.FoodDetails
 import com.jordju.foodieapp.core.domain.model.FoodList
 import com.jordju.foodieapp.core.domain.repository.FoodieRepository
@@ -20,13 +21,13 @@ import javax.inject.Singleton
 class FoodieRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-): FoodieRepository {
+) : FoodieRepository {
     override fun getFoodList(query: String): Flow<Resource<FoodList>> =
         flow {
             emit(Resource.Loading())
             val remoteCalls = remoteDataSource.getFoodList(query)
             remoteCalls.collect {
-                when(it) {
+                when (it) {
                     is ApiResponse.Success -> {
                         emit(Resource.Success(DataMapper.mapFoodListToEntities(it.data)))
                     }
@@ -45,7 +46,7 @@ class FoodieRepositoryImpl @Inject constructor(
             emit(Resource.Loading())
             val remoteCalls = remoteDataSource.getFoodDetails(detailId)
             remoteCalls.collect {
-                when(it) {
+                when (it) {
                     is ApiResponse.Success -> {
                         emit(Resource.Success(DataMapper.mapFoodDetailsToEntities(it.data)))
                     }
@@ -59,7 +60,7 @@ class FoodieRepositoryImpl @Inject constructor(
             }
         }
 
-    override fun getAllSavedFoods(): Flow<Resource<List<FoodEntity>>> =
+    override fun getAllSavedFoods(): Flow<Resource<List<Food>>> =
         flow {
             emit(Resource.Loading())
             val localData = localDataSource.getAllSavedFoods()
@@ -68,15 +69,17 @@ class FoodieRepositoryImpl @Inject constructor(
                     emit(Resource.Error(it.message))
                 }
                 .collect {
-                emit(Resource.Success(it))
-            }
+                    emit(Resource.Success(DataMapper.mapFoodEntityListToFoodList(it)))
+                }
         }
 
-    override suspend fun insertFoodToFavorite(food: FoodEntity) {
-        localDataSource.insertFoodToFavorite(food)
+    override suspend fun insertFoodToFavorite(food: Food) {
+        val data = DataMapper.mapFoodToEntity(food)
+        localDataSource.insertFoodToFavorite(data)
     }
 
-    override suspend fun deleteFoodFromFavorite(food: FoodEntity) {
-        localDataSource.deleteFoodFromFavorite(food)
+    override suspend fun deleteFoodFromFavorite(food: Food) {
+        val data = DataMapper.mapFoodToEntity(food)
+        localDataSource.deleteFoodFromFavorite(data)
     }
 }

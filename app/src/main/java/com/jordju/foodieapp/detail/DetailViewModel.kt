@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jordju.foodieapp.core.data.Resource
-import com.jordju.foodieapp.core.data.local.entity.FoodEntity
+import com.jordju.foodieapp.core.domain.model.Food
 import com.jordju.foodieapp.core.domain.model.FoodDetails
 import com.jordju.foodieapp.core.domain.usecase.GetFoodDetailsUseCase
 import com.jordju.foodieapp.core.domain.usecase.InsertFoodToDatabaseUseCase
@@ -28,7 +28,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun insertFoodToFavorite(food: FoodEntity) {
+    fun insertFoodToFavorite(food: Food) {
         viewModelScope.launch {
             insertFoodToFavorite.execute(food)
         }

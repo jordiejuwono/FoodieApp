@@ -1,10 +1,31 @@
 package com.jordju.foodieapp.core.utils
 
+import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.data.remote.model.response.detail.FoodDetailsResponse
 import com.jordju.foodieapp.core.data.remote.model.response.list.*
 import com.jordju.foodieapp.core.domain.model.*
 
 object DataMapper {
+    fun mapFoodEntityListToFoodList(localData: List<FoodEntity>?): List<Food> {
+        val foodList = ArrayList<Food>()
+        localData?.map {
+            val food = Food(
+                recipeId = it.recipeId,
+                name = it.name,
+                image = it.image,
+            )
+            foodList.add(food)
+        }
+        return foodList
+    }
+
+    fun mapFoodToEntity(data: Food?): FoodEntity =
+        FoodEntity(
+            recipeId = data?.recipeId ?: "",
+            name = data?.name ?: "",
+            image = data?.image ?: "",
+        )
+
     fun mapFoodDetailsToEntities(response: FoodDetailsResponse) =
         FoodDetails(
             links = mapLinksResponseToEntities(response.links),
