@@ -20,4 +20,7 @@ class AppModule {
     @Provides
     fun provideFoodieUseCase(foodieRepository: FoodieRepository) = FoodieInteractor(foodieRepository)
 
+    @Provides
+    fun isFoodAlreadyExist(foodieRepository: FoodieRepository) = IsFoodAlreadyExistUseCase(foodieRepository)
+
 }

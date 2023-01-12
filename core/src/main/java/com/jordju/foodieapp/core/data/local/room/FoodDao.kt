@@ -20,4 +20,7 @@ interface FoodDao {
     @Delete
     suspend fun deleteFoodFromFavorite(food: FoodEntity)
 
+    @Query("SELECT EXISTS(SELECT * FROM foods WHERE recipeId=:id)")
+    fun isFoodAlreadyExist(id: String): Flow<Boolean>
+
 }

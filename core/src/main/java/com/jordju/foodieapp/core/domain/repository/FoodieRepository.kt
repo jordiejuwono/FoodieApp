@@ -1,7 +1,6 @@
 package com.jordju.foodieapp.core.domain.repository
 
 import com.jordju.foodieapp.core.data.Resource
-import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.domain.model.Food
 import com.jordju.foodieapp.core.domain.model.FoodDetails
 import com.jordju.foodieapp.core.domain.model.FoodList
@@ -17,5 +16,7 @@ interface FoodieRepository {
     suspend fun insertFoodToFavorite(food: Food)
 
     suspend fun deleteFoodFromFavorite(food: Food)
+
+    fun isFoodAlreadyExist(id: String): Flow<Boolean>
 
 }

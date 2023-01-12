@@ -11,4 +11,6 @@ class LocalDataSource @Inject constructor(private val foodDao: FoodDao) {
     suspend fun insertFoodToFavorite(food: FoodEntity) = foodDao.insertFoodToFavorite(food)
 
     suspend fun deleteFoodFromFavorite(food: FoodEntity) = foodDao.deleteFoodFromFavorite(food)
+
+    fun isFoodAlreadyExist(id: String): Flow<Boolean> = foodDao.isFoodAlreadyExist(id)
 }

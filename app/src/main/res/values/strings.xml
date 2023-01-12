@@ -19,4 +19,5 @@
     <string name="text_message_dialog">Do you want to add %s to favorite?</string>
     <string name="text_yes_dialog">YES</string>
     <string name="text_no_dialog">NO</string>
+    <string name="text_added_to_favorite">Food added to Favorites</string>
 </resources>

@@ -14,8 +14,8 @@ class FoodListDbAdapter(private val onClickListener: OnClickListeners) : Recycle
     var items = ArrayList<Food>()
 
     interface OnClickListeners {
-        fun onClick(item: FoodEntity)
-        fun onDeleteClick(item: FoodEntity)
+        fun onClick(item: Food)
+        fun onDeleteClick(item: Food)
     }
 
     fun setData(newData: List<Food>?) {
@@ -27,7 +27,7 @@ class FoodListDbAdapter(private val onClickListener: OnClickListeners) : Recycle
 
     class ListViewHolder(val binding: ItemFoodListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: FoodEntity) {
+        fun bind(data: Food) {
             with(binding) {
                 Glide.with(itemView.context)
                     .load(data.image)

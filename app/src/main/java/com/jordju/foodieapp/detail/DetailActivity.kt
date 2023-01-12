@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -47,9 +49,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        val detailData = intent.getStringExtra(DETAIL_URI)
+        val detailId = intent.getStringExtra(DETAIL_URI)
 
-        viewModel.getFoodDetails(detailData ?: "")
+        viewModel.getFoodDetails(detailId ?: "")
+        viewModel.isFoodAlreadyExist(detailId ?: "")
     }
 
     private fun bindData(details: Resource<FoodDetails>) {
@@ -96,6 +99,7 @@ class DetailActivity : AppCompatActivity() {
                             name = details.data?.recipe?.label ?: "",
                             image = details.data?.recipe?.image ?: ""
                         ))
+                        Toast.makeText(this@DetailActivity, getString(R.string.text_added_to_favorite), Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }
                     .setNegativeButton(getString(R.string.text_no_dialog)) { dialog, _ ->
@@ -114,7 +118,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-
         viewModel.foodDetails.observe(this) {
             when (it) {
                 is Resource.Loading -> {
@@ -127,6 +130,14 @@ class DetailActivity : AppCompatActivity() {
                 is Resource.Error -> {
                     showLoading(false)
                 }
+            }
+        }
+
+        viewModel.isFoodExistResult.observe(this) { isExists ->
+            if (isExists) {
+                binding.ivFavorite.setColorFilter(ContextCompat.getColor(this, android.R.color.holo_red_dark))
+            } else {
+                binding.ivFavorite.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_24))
             }
         }
     }

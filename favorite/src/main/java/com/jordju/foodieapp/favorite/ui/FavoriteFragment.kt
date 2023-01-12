@@ -17,6 +17,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jordju.foodieapp.MyApplication
 import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.data.local.entity.FoodEntity
+import com.jordju.foodieapp.core.domain.model.Food
 import com.jordju.foodieapp.core.ui.FoodListDbAdapter
 import com.jordju.foodieapp.detail.DetailActivity
 import com.jordju.foodieapp.favorite.R
@@ -62,14 +63,14 @@ class FavoriteFragment : Fragment() {
 
     private fun setRecyclerView() {
         val foodListAdapter = FoodListDbAdapter(object : FoodListDbAdapter.OnClickListeners {
-            override fun onClick(item: FoodEntity) {
+            override fun onClick(item: Food) {
                 val uri = Uri.parse("foodieapp://detail")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 intent.putExtra("DETAIL_URI", item.recipeId)
                 startActivity(intent)
             }
 
-            override fun onDeleteClick(item: FoodEntity) {
+            override fun onDeleteClick(item: Food) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(getString(R.string.text_delete_dialog))
                     .setMessage(getString(R.string.text_message_dialog, item.name))

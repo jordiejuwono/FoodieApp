@@ -82,4 +82,8 @@ class FoodieRepositoryImpl @Inject constructor(
         val data = DataMapper.mapFoodToEntity(food)
         localDataSource.deleteFoodFromFavorite(data)
     }
+
+    override fun isFoodAlreadyExist(id: String): Flow<Boolean> {
+        return localDataSource.isFoodAlreadyExist(id)
+    }
 }

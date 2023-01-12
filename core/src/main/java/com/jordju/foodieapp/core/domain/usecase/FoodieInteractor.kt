@@ -18,4 +18,5 @@ class FoodieInteractor @Inject constructor(private val foodieRepository: FoodieR
     override suspend fun deleteSavedFood(food: Food) {
         return foodieRepository.deleteFoodFromFavorite(food)
     }
+
 }
