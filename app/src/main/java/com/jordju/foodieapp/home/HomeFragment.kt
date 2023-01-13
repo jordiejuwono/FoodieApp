@@ -150,7 +150,7 @@ class HomeFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    foodListAdapter.setData(it.data?.hits)
+                    foodListAdapter.differ.submitList(it.data?.hits)
                 }
                 is Resource.Error -> {
                     showLoading(false)

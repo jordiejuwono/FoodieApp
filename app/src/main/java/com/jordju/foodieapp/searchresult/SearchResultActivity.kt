@@ -84,7 +84,7 @@ class SearchResultActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     showError(false)
                     showLoading(false)
-                    adapter.setData(it.data?.hits)
+                    adapter.differ.submitList(it.data?.hits)
                 }
                 is Resource.Error -> {
                     showLoading(false)

@@ -39,7 +39,7 @@ class FavoriteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -97,7 +97,7 @@ class FavoriteFragment : Fragment() {
 
                 }
                 is Resource.Success -> {
-                    foodListAdapter.setData(it.data)
+                    foodListAdapter.differ.submitList(it.data)
                     binding.tvNoFavorite.isVisible = it.data?.isEmpty() == true
                 }
                 is Resource.Error -> {
