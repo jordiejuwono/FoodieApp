@@ -38,7 +38,10 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
         backPressListener()
 
-        initData()
+        if (savedInstanceState == null) {
+            initData()
+        }
+
         observeData()
     }
 
