@@ -45,7 +45,7 @@
 }
  
 # Ignore annotation used for build tooling.
-#-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
  
 # Ignore JSR 305 annotations for embedding nullability information.
 -dontwarn javax.annotation.**
@@ -77,3 +77,11 @@ public *;
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
 *** rewind();
 }
+ 
+# Uncomment for DexGuard only
+#-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+ 
+ 
+##---------------Begin: proguard configuration for RxJava ----------
+# Uncomment if you use RxJava
+#-dontwarn java.util.concurrent.Flow*
