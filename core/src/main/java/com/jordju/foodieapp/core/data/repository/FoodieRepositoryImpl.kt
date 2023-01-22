@@ -2,7 +2,6 @@ package com.jordju.foodieapp.core.data.repository
 
 import com.jordju.foodieapp.core.data.Resource
 import com.jordju.foodieapp.core.data.local.datasource.LocalDataSource
-import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.data.remote.datasource.RemoteDataSource
 import com.jordju.foodieapp.core.data.remote.network.ApiResponse
 import com.jordju.foodieapp.core.domain.model.Food
@@ -12,7 +11,6 @@ import com.jordju.foodieapp.core.domain.repository.FoodieRepository
 import com.jordju.foodieapp.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton

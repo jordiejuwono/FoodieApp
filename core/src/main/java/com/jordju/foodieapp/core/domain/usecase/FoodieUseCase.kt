@@ -1,7 +1,6 @@
 package com.jordju.foodieapp.core.domain.usecase
 
 import com.jordju.foodieapp.core.data.Resource
-import com.jordju.foodieapp.core.data.local.entity.FoodEntity
 import com.jordju.foodieapp.core.domain.model.Food
 import kotlinx.coroutines.flow.Flow
 

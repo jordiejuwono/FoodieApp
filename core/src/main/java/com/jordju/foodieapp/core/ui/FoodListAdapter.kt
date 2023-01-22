@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jordju.foodieapp.core.databinding.ItemFoodListBinding
-import com.jordju.foodieapp.core.domain.model.Food
 import com.jordju.foodieapp.core.domain.model.HitEntity
 
 class FoodListAdapter(private val onClickListener: OnClickListeners) : RecyclerView.Adapter<FoodListAdapter.ListViewHolder>() {

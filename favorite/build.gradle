@@ -8,7 +8,7 @@ apply from: '../shared_dependencies.gradle'
 
 android {
     namespace 'com.jordju.foodieapp.favorite'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.jordju.foodieapp.favorite"

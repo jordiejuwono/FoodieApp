@@ -9,7 +9,7 @@ buildscript {
     ext.livedata_ktx_version='2.5.1'
     ext.fragment_ktx_version='1.5.5'
     ext.activity_ktx_version='1.6.1'
-    ext.room_version='2.4.3'
+    ext.room_version='2.5.0'
 }
 plugins {
     id 'com.android.application' version '7.2.1' apply false

@@ -1,8 +1,6 @@
 package com.jordju.foodieapp.core.domain.model
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import com.jordju.foodieapp.core.data.remote.model.response.list.*
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
